@@ -1,12 +1,12 @@
-﻿(get-psprovider 'FileSystem').Home = 'C:\Users\mradosavljevic\Documents\WindowsPowerShell'
+﻿(get-psprovider 'FileSystem').Home = 'C:\Users\mradosavljevic'
 Remove-Variable -Force HOME
-Set-Variable HOME "C:\Users\mradosavljevic\Documents\WindowsPowerShell"
+Set-Variable HOME "C:\Users\mradosavljevic"
 
 # Setup the $home directory correctly
 if (-not $global:home) { $global:home = (resolve-path ~) }
 
 # A couple of directory variables for convenience
-$dotfiles = resolve-path ~/dotfiles/
+$dotfiles = resolve-path ~/Documents/WindowsPowerShell/dotfiles/
 $scripts = join-path $dotfiles "powershell"
 $env:PSModulePath = join-path $scripts modules
 
@@ -17,7 +17,7 @@ Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 
 
 # Load Jump-Location profile
-. '~/dotfiles/powershell/modules/Jump.Location-0.4.1/Load.ps1'
+. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump.Location-0.4.1/Load.ps1'
 
 function get-isAdminUser() {
 	$id = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -45,7 +45,7 @@ function get-vimShortPath([string] $path) {
 }
 
 # Load posh-git example profile
-. '~/dotfiles/powershell/modules/posh-git/profile.example.ps1'
+. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
 
 function prompt {
 	$prefix = ""
@@ -166,8 +166,8 @@ function getDirSize
     }
 }
 
-cd ~
-cls
+#cd ~
+#cls
 
 
 
