@@ -18,6 +18,7 @@ Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"
+Set-Alias gs "git status" 
 
 
 
