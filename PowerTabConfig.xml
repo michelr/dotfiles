@@ -63,7 +63,7 @@
   <Config>
     <Category>Colors</Category>
     <Name>SelectedTextColor</Name>
-    <Value>Red</Value>
+    <Value>Yellow</Value>
     <Type>ConsoleColor</Type>
   </Config>
   <Config>
