@@ -18,9 +18,6 @@ Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"
-Set-Alias gs "git status" 
-
-
 
 $global:promptTheme = @{
 	prefixColor = [ConsoleColor]::Cyan
@@ -52,6 +49,7 @@ function prompt {
 	write-vcsStatus # from posh-git, posh-hg and posh-svn
 	return ' '
 }
+
 
 New-CommandWrapper Out-Default -Process {
     $regex_opts = ([System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
@@ -105,12 +103,26 @@ New-CommandWrapper Out-Default -Process {
 
 function Write-Color-LS {
 	param ([string]$color = "white", $file)
-	Write-host ("{0,-7} {1,25} {2,10} {3}" -f $file.mode, ([String]::Format("{0,10}  {1,8}", $file.LastWriteTime.ToString("d"), $file.LastWriteTime.ToString("t"))), $file.length, $file.name) -foregroundcolor $color 
+    if ($file.mode.Contains("h")){
+        $color = "DarkGray"
+    }
+    $length = $file.length
+    if ($file -is [System.IO.DirectoryInfo]) {
+        $length = "<DIR>"
+    }
+
+	Write-host ("{0,-7} {1,25} {2,10} {3}" -f $file.mode, ([String]::Format("{0,10}  {1,8}", $file.LastWriteTime.ToString("d"), $file.LastWriteTime.ToString("t"))), $length, $file.name) -foregroundcolor $color 
 }
 
 function Get-Hosts{
 	start-process -verb RunAs notepad++ C:\Windows\System32\Drivers\etc\hosts
 }
+
+function lsf { dir -force }
+function invoke-terminalLock { RunDll32.exe User32.dll,LockWorkStation }
+function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
+set-alias lock invoke-terminalLock
+set-alias syssleep invoke-systemSleep
 
 cd ~
 cls
