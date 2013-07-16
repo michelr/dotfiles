@@ -121,8 +121,11 @@ function Get-Hosts{
 function lsf { dir -force }
 function invoke-terminalLock { RunDll32.exe User32.dll,LockWorkStation }
 function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
+function get-GitStatus { git status }
+
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
+set-alias gs get-GitStatus
 
 cd ~
 cls
