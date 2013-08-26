@@ -123,11 +123,14 @@ function invoke-terminalLock { RunDll32.exe User32.dll,LockWorkStation }
 function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
 function get-GitStatus { git status }
 function commit-sthlmrepository { TortoiseProc  /path:"C:\Projects\SthlmStad\SthlmS~1\Development" /command:commit /closeonend:1 }
+function update-sthlmrepository { TortoiseProc  /path:"C:\Projects\SthlmStad\SthlmS~1\Development" /command:update /closeonend:1 }
 
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
 set-alias gs get-GitStatus
 set-alias csthlm commit-sthlmrepository
+set-alias usthlm update-sthlmrepository
+set-alias ss Switch-Website
 
 cd ~
 cls
