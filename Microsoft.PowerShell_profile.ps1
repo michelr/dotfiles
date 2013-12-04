@@ -7,13 +7,13 @@ $global:home = (resolve-path ~)
 $dotfiles = resolve-path ~/Documents/WindowsPowerShell/dotfiles/
 $scripts = join-path $dotfiles "powershell"
 $env:PSModulePath += ";" + (join-path $scripts modules)
-
+$env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 # Path tweaks
 add-pathVariable $scripts
 
 #Modules
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
-. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump.Location-0.4.1/Load.ps1'
+. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump-Location-0.5.1/Load.ps1'
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
 
 #Aliases
@@ -132,9 +132,13 @@ set-alias csthlm commit-sthlmrepository
 set-alias usthlm update-sthlmrepository
 set-alias ss Switch-Website
 
-cd ~
-cls
+#cd ~
+#cls
 
 
 
+
+
+# Load Jump-Location profile
+#Import-Module 'C:\Users\mradosavljevic\Documents\WindowsPowerShell\dotfiles\powershell\Modules\Jump-Location-0.5.1\Jump.Location.psd1'
 
