@@ -18,6 +18,9 @@ Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"
+Set-Alias mdp "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
+Set-Alias vim "C:\Program Files (x86)\vim\vim74\vim.exe"
+Set-Alias vi "C:\Program Files (x86)\vim\vim74\vim.exe"
 
 $global:promptTheme = @{
 	prefixColor = [ConsoleColor]::Cyan
@@ -39,15 +42,17 @@ function get-vimShortPath([string] $path) {
 function prompt {
 	$prefix = ""
 	$hostName = [net.dns]::GetHostName().ToLower()
+	$userName = [Environment]::UserName
 	$shortPath = get-vimShortPath(get-location)
 
 	write-host $prefix -noNewLine -foregroundColor $promptTheme.prefixColor
-	write-host $hostName -noNewLine -foregroundColor $promptTheme.hostNameColor
+	write-host $userName -noNewLine -foregroundColor $promptTheme.hostNameColor
 	write-host ' {' -noNewLine -foregroundColor $promptTheme.pathBracesColor
 	write-host $shortPath -noNewLine -foregroundColor $promptTheme.pathColor
 	write-host '}' -noNewLine -foregroundColor $promptTheme.pathBracesColor
-	write-vcsStatus # from posh-git, posh-hg and posh-svn
-	return ' '
+	write-vcsStatus # from posh-git, posh-hg and posh-svn	
+	write-host ''
+	return '>'
 }
 
 
@@ -122,16 +127,14 @@ function lsf { dir -force }
 function invoke-terminalLock { RunDll32.exe User32.dll,LockWorkStation }
 function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
 function get-GitStatus { git status }
-function commit-sthlmrepository { TortoiseProc  /path:"C:\Projects\SthlmStad\SthlmS~1\Development" /command:commit /closeonend:1 }
-function update-sthlmrepository { TortoiseProc  /path:"C:\Projects\SthlmStad\SthlmS~1\Development" /command:update /closeonend:1 }
+function vim-Config { vim ~/_vimrc }
 
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
 set-alias gs get-GitStatus
-set-alias csthlm commit-sthlmrepository
-set-alias usthlm update-sthlmrepository
-set-alias ss Switch-Website
 
+set-alias ss Switch-Website
+set-alias vimc vim-Config
 #cd ~
 #cls
 
