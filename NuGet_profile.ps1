@@ -14,7 +14,7 @@ add-pathVariable $scripts
 #Modules
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump-Location-0.5.1/Load.ps1'
-. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
+. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.nuget.ps1'
 
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"

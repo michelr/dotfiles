@@ -6,10 +6,10 @@ Import-Module .\posh-git
 # If module is installed in a default location ($env:PSModulePath),
 # use this instead (see about_Modules for more information):
 # Import-Module posh-git
-$global:GitPromptSettings.WorkingForegroundColor      = [ConsoleColor]::Blue 
-$global:GitPromptSettings.UntrackedForegroundColor    = [ConsoleColor]::Blue
-$global:GitPromptSettings.BranchBehindForegroundColor = [ConsoleColor]::Blue
-$global:GitPromptSettings.BranchForegroundColor       = [ConsoleColor]::DarkYellow
+$global:GitPromptSettings.WorkingForegroundColor      = [ConsoleColor]::DarkRed 
+$global:GitPromptSettings.UntrackedForegroundColor    = [ConsoleColor]::DarkRed
+$global:GitPromptSettings.BranchBehindForegroundColor = [ConsoleColor]::DarkRed
+$global:GitPromptSettings.BranchForegroundColor       = [ConsoleColor]::DarkCyan
 $global:GitPromptSettings.BranchAheadForegroundColor  = [ConsoleColor]::DarkGreen
 $global:GitPromptSettings.BeforeIndexForegroundColor  = [ConsoleColor]::DarkGreen
 $global:GitPromptSettings.IndexForegroundColor        = [ConsoleColor]::DarkGreen
