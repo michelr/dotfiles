@@ -10,7 +10,6 @@ $env:PSModulePath += ";" + (join-path $scripts modules)
 $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 # Path tweaks
 add-pathVariable $scripts
-
 #Modules
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump-Location-0.5.1/Load.ps1'
@@ -71,7 +70,6 @@ New-CommandWrapper Out-Default -Process {
     {
         if(-not ($notfirst)) 
         {
-           Write-Host
            Write-Host "    Directory: " -noNewLine
            Write-Host " $(pwd)`n" -foregroundcolor "Magenta"           
            Write-Host "Mode                LastWriteTime     Length Name"
@@ -102,8 +100,6 @@ New-CommandWrapper Out-Default -Process {
 
     $_ = $null
     }
-} -end {
-    write-host ""
 }
 
 function Write-Color-LS {
@@ -129,19 +125,13 @@ function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
 function get-GitStatus { git status }
 function vim-Config { vim ~/_vimrc }
 
+function Set-ProjectDir { split-path -parent $dte.Solution.FileName | cd }
+set-alias projdir Set-ProjectDir
+
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
 set-alias gs get-GitStatus
 
 set-alias ss Switch-Website
 set-alias vimc vim-Config
-#cd ~
-#cls
-
-
-
-
-
-# Load Jump-Location profile
-#Import-Module 'C:\Users\mradosavljevic\Documents\WindowsPowerShell\dotfiles\powershell\Modules\Jump-Location-0.5.1\Jump.Location.psd1'
-
+cls

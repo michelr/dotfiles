@@ -13,7 +13,6 @@ $global:GitPromptSettings.BranchForegroundColor       = [ConsoleColor]::DarkYell
 $global:GitPromptSettings.BranchAheadForegroundColor  = [ConsoleColor]::DarkGreen
 $global:GitPromptSettings.BeforeIndexForegroundColor  = [ConsoleColor]::DarkGreen
 $global:GitPromptSettings.IndexForegroundColor        = [ConsoleColor]::DarkGreen
-
 # Set up a simple prompt, adding the git prompt parts inside git repos
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE

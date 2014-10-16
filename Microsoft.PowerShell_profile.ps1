@@ -13,7 +13,7 @@ add-pathVariable $scripts
 
 #Modules
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
-. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump-Location-0.5.1/Load.ps1'
+Import-Module "Jump.Location" -Arg (join-path $scripts Jump.Location.psd1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
 
 #Aliases
@@ -52,7 +52,7 @@ function prompt {
 	write-host '}' -noNewLine -foregroundColor $promptTheme.pathBracesColor
 	write-vcsStatus # from posh-git, posh-hg and posh-svn	
 	write-host ''
-	return '>'
+	return '~'
 }
 
 
@@ -85,15 +85,15 @@ New-CommandWrapper Out-Default -Process {
         }
         elseif ($compressed.IsMatch($_.Name))
         {
-            Write-Color-LS "DarkGreen" $_
+            Write-Color-LS "DarkCyan" $_
         }
         elseif ($executable.IsMatch($_.Name))
         {
-            Write-Color-LS "Red" $_
+            Write-Color-LS "DarkMagenta" $_
         }
         elseif ($text_files.IsMatch($_.Name))
         {
-            Write-Color-LS "Yellow" $_
+            Write-Color-LS "DarkYellow" $_
         }
         else
         {
@@ -102,14 +102,12 @@ New-CommandWrapper Out-Default -Process {
 
     $_ = $null
     }
-} -end {
-    write-host ""
 }
 
 function Write-Color-LS {
 	param ([string]$color = "white", $file)
     if ($file.mode.Contains("h")){
-        $color = "DarkGray"
+        $color = "Yellow"
     }
     $length = $file.length
     if ($file -is [System.IO.DirectoryInfo]) {
@@ -128,6 +126,9 @@ function invoke-terminalLock { RunDll32.exe User32.dll,LockWorkStation }
 function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
 function get-GitStatus { git status }
 function vim-Config { vim ~/_vimrc }
+function ps-Config { vim ~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1 }
+winrm s winrm/config/client '@{TrustedHosts="*"}'
+function Enter-IntraTest { Enter-PSSession -ComputerName sto-stos43.co.int -Credential co\mradosavljevic }
 
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
@@ -135,13 +136,10 @@ set-alias gs get-GitStatus
 
 set-alias ss Switch-Website
 set-alias vimc vim-Config
-#cd ~
-#cls
+set-alias psc ps-Config
+
+set-location ~
 
 
 
-
-
-# Load Jump-Location profile
-#Import-Module 'C:\Users\mradosavljevic\Documents\WindowsPowerShell\dotfiles\powershell\Modules\Jump-Location-0.5.1\Jump.Location.psd1'
 
