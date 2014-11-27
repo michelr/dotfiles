@@ -12,6 +12,7 @@ $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 add-pathVariable $scripts
 
 #Modules
+Import-Module "PowerTab"
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 Import-Module "Jump.Location" -Arg (join-path $scripts Jump.Location.psd1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
@@ -127,9 +128,8 @@ function invoke-systemSleep { RunDll32.exe PowrProf.dll,SetSuspendState }
 function get-GitStatus { git status }
 function vim-Config { vim ~/_vimrc }
 function ps-Config { vim ~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1 }
-winrm s winrm/config/client '@{TrustedHosts="*"}'
 function Enter-IntraTest { Enter-PSSession -ComputerName sto-stos43.co.int -Credential co\mradosavljevic }
-
+function Start-Remoting { Enable-PSRemoting –force;winrm s winrm/config/client '@{TrustedHosts="*"}' }
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
 set-alias gs get-GitStatus
