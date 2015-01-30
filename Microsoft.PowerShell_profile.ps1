@@ -24,6 +24,10 @@ Set-PSReadlineOption -TokenKind Parameter -ForegroundColor DarkRed
 Set-PSReadlineOption -TokenKind String -ForegroundColor Magenta
 Set-PSReadlineOption -TokenKind Variable -ForegroundColor DarkCyan
 Set-PSReadlineOption -TokenKind Number -ForegroundColor DarkGreen
+Set-PSReadlineOption -TokenKind Operator -ForegroundColor Yellow
+Set-PSReadlineOption -TokenKind Command -ForegroundColor White
+Set-PSReadlineOption -TokenKind Member -ForegroundColor Yellow
+Set-PSReadlineOption -TokenKind None -ForegroundColor Yellow
 
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"
