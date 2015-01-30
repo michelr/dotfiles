@@ -17,6 +17,14 @@ Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
 Import-Module "Jump.Location" -Arg (join-path $scripts Jump.Location.psd1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.example.ps1'
 
+Import-Module PSReadline
+Set-PSReadlineKeyHandler -Key UpArrow        -Function HistorySearchBackward
+Set-PSReadlineKeyHandler -Key DownArrow      -Function HistorySearchForward
+Set-PSReadlineOption -TokenKind Parameter -ForegroundColor DarkRed
+Set-PSReadlineOption -TokenKind String -ForegroundColor Magenta
+Set-PSReadlineOption -TokenKind Variable -ForegroundColor DarkCyan
+Set-PSReadlineOption -TokenKind Number -ForegroundColor DarkGreen
+
 #Aliases
 Set-Alias np "C:\Program Files (x86)\Notepad++\notepad++.exe"
 Set-Alias mdp "C:\Program Files (x86)\MarkdownPad 2\MarkdownPad2.exe"
@@ -130,6 +138,14 @@ function vim-Config { vim ~/_vimrc }
 function ps-Config { vim ~/Documents/WindowsPowerShell/Microsoft.PowerShell_profile.ps1 }
 function Enter-IntraTest { Enter-PSSession -ComputerName sto-stos43.co.int -Credential co\mradosavljevic }
 function Start-Remoting { Enable-PSRemoting –force;winrm s winrm/config/client '@{TrustedHosts="*"}' }
+function Show-Colors( ) {
+  $colors = [Enum]::GetValues( [ConsoleColor] )
+  $max = ($colors | foreach { "$_ ".Length } | Measure-Object -Maximum).Maximum
+  foreach( $color in $colors ) {
+    Write-Host (" {0,2} {1,$max} " -f [int]$color,$color) -NoNewline
+    Write-Host "$color" -Foreground $color
+  }
+}
 set-alias lock invoke-terminalLock
 set-alias syssleep invoke-systemSleep
 set-alias gs get-GitStatus
@@ -143,3 +159,5 @@ set-location ~
 
 
 
+New-Alias -name locate -value 'C:\Users\mradosavljevic\AppData\Local\locate\Invoke-Locate.ps1' -scope Global -force
+New-Alias -name updatedb -value 'C:\Users\mradosavljevic\AppData\Local\locate\Update-LocateDB.ps1' -scope Global -force
