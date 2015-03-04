@@ -20,13 +20,13 @@ Import-Module "Jump.Location" -Arg (join-path $scripts Jump.Location.psd1)
 Import-Module PSReadline
 Set-PSReadlineKeyHandler -Key UpArrow        -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key DownArrow      -Function HistorySearchForward
-Set-PSReadlineOption -TokenKind Parameter -ForegroundColor DarkRed
+Set-PSReadlineOption -TokenKind Parameter -ForegroundColor Blue
 Set-PSReadlineOption -TokenKind String -ForegroundColor Magenta
 Set-PSReadlineOption -TokenKind Variable -ForegroundColor DarkCyan
 Set-PSReadlineOption -TokenKind Number -ForegroundColor DarkGreen
-Set-PSReadlineOption -TokenKind Operator -ForegroundColor Yellow
+Set-PSReadlineOption -TokenKind Operator -ForegroundColor Blue
 Set-PSReadlineOption -TokenKind Command -ForegroundColor White
-Set-PSReadlineOption -TokenKind Member -ForegroundColor Yellow
+Set-PSReadlineOption -TokenKind Member -ForegroundColor Blue
 Set-PSReadlineOption -TokenKind None -ForegroundColor Yellow
 
 #Aliases
@@ -63,9 +63,9 @@ function prompt {
 	write-host ' {' -noNewLine -foregroundColor $promptTheme.pathBracesColor
 	write-host $shortPath -noNewLine -foregroundColor $promptTheme.pathColor
 	write-host '}' -noNewLine -foregroundColor $promptTheme.pathBracesColor
-	write-vcsStatus # from posh-git, posh-hg and posh-svn	
+	write-vcsStatus
 	write-host ''
-	return '~'
+	return '» '
 }
 
 
@@ -120,7 +120,7 @@ New-CommandWrapper Out-Default -Process {
 function Write-Color-LS {
 	param ([string]$color = "white", $file)
     if ($file.mode.Contains("h")){
-        $color = "Yellow"
+        $color = "DarkGray"
     }
     $length = $file.length
     if ($file -is [System.IO.DirectoryInfo]) {
