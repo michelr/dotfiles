@@ -12,7 +12,7 @@ $env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
 add-pathVariable $scripts
 #Modules
 Import-Module "Pscx" -Arg (join-path $scripts Pscx.UserPreferences.ps1)
-. '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/Jump-Location-0.5.1/Load.ps1'
+Import-Module "Jump.Location" -Arg (join-path $scripts Jump.Location.psd1)
 . '~/Documents/WindowsPowerShell/dotfiles/powershell/modules/posh-git/profile.nuget.ps1'
 
 #Aliases
