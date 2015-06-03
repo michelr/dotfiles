@@ -1,5 +1,5 @@
 ﻿#Set home dir
-(get-psprovider 'FileSystem').Home = 'C:\Users\mradosavljevic'
+(get-psprovider 'FileSystem').Home = 'C:\Users\Michel Radosavljevic'
 Remove-Variable -Force HOME
 $global:home = (resolve-path ~)
 
