@@ -1,5 +1,5 @@
 ﻿#Set home dir
-(get-psprovider 'FileSystem').Home = 'C:\Users\Michel Radosavljevic'
+(get-psprovider 'FileSystem').Home = 'C:\Users\mr'
 Remove-Variable -Force HOME
 $global:home = (resolve-path ~)
 
@@ -7,7 +7,8 @@ $global:home = (resolve-path ~)
 $dotfiles = resolve-path ~/Documents/WindowsPowerShell/dotfiles/
 $scripts = join-path $dotfiles "powershell"
 $env:PSModulePath += ";" + (join-path $scripts modules)
-$env:path += ";" + (Get-Item "Env:ProgramFiles(x86)").Value + "\Git\bin"
+$env:path += ";" + (Get-Item "Env:ProgramFiles").Value + "\Git\bin"
+$env:path += ";" + (Get-Item "Env:ProgramFiles").Value + "\Git\usr\bin"
 # Path tweaks
 add-pathVariable $scripts
 
