@@ -1,4 +1,4 @@
-dotfiles
+Dotfiles for PowerShell
 ========
 
-dotfiles
+My favorite settings for PowerShell to mimic my zsh prompt in unix
